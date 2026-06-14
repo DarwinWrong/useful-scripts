@@ -1,3 +1,4 @@
+# EN
 Hi there!
 Here are implemented useful scripts for automating various processes that we often do manually and waste a lot of time on.
 
@@ -7,6 +8,7 @@ Here are implemented useful scripts for automating various processes that we oft
 
 ---
 
+# UA
 Привіт!
 Тут реалізовано корисні скрипти для автоматизації різних процесів, які ми часто виконуємо вручну та витрачаємо на них багато часу.
 
