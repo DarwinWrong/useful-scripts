@@ -32,15 +32,6 @@ This repository contains a set of scripts that collect the list of all currently
 - **SaveOpenFolders.ps1** – obtains the list of open folders via `Get-Item`/`Get-Process`, then writes to `open_folders.txt`.
 - **Win_Folders_Manager.bat** – batch wrapper that calls the PowerShell script.
 
-Example
-```powershell
-$processes = Get-Process
-foreach ($p in $processes) {
-    # logic to find open folders (e.g., those with a specific WMI attribute)
-}
-Out-File -FilePath "open_folders.txt" -Encoding utf8
-```
-
 ## Author
 Author: `godin`.  
 
@@ -83,5 +74,5 @@ Author: `godin`.
 ```
 
 ## Автор
-Автор: `godin`. Хочете побачити інші проекти? Перегляньте портфоліо на GitHub.
+Автор: `godin`
 ---
