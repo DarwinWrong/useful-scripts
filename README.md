@@ -25,11 +25,11 @@ To simplify on Windows, run create_structure_en.bat it executes create_structure
 
 1) Windows:
 ```
-python create_structure_ua.py (or py create_structure_ua.py)
+python create_structure_en.py (or py create_structure_en.py)
 ```
 2) Mac/Linux:
 ```
-python3 create_structure_ua.py
+python3 create_structure_en.py
 ```
 
 ---
