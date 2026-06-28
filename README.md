@@ -8,6 +8,7 @@ Here are implemented useful scripts for automating various processes that we oft
 4) **/stop_ports_process** - A collection of scripts to terminate processes listening on specific ports on Windows.
 5) **/track_sys_process_realtime** - A Windows script that tracks the launch and termination of all processes in real time and displays where the process was launched from.
 6) /deepseek_v3_tokenizer - Displays statistics on token spending. Input: text or file. menu_tokenizer.bat – interactive menu: Tokenize string. Tokenize file.
+7) /ai_agent_cli_panel - A convenient batch menu for managing AI CLI tools.
 
 ---
 
@@ -21,3 +22,4 @@ Here are implemented useful scripts for automating various processes that we oft
 4) **/stop_ports_process** – набір скриптів для завершення процесів, що прослуховують певні порти у Windows.
 5) **/track_sys_process_realtime** - Windows-скрипт, який відстежує запуск та завершення всіх процесів у реальному часі та відображає звідки запущено процес.
 6) /deepseek_v3_tokenizer – Відображає статистику витрат токенів. Вхідні дані: текст або файл. menu_tokenizer.bat – інтерактивне меню: Рядок токенізувати. Файл токенізувати.
+7) /ai_agent_cli_panel - Зручне batch-меню для керування AI CLI інструментами.
