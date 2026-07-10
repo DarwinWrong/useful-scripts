@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-A structure generator that respects visual alignment (prefix along with pseudo-graphics).
-
-Usage:
-  python create_structure.py [md_file] [output_dir] [--tab-size N]
+Structure generator that supports:
+- plain indentation (spaces/tabs)
+- pseudo-graphics (box-drawing)
+- comments (#, <-, //)
+- items at root level (depth 0) after the root
 """
 
 import os
@@ -18,20 +19,20 @@ def is_whitespace_or_tree(ch: str) -> bool:
     return ch in (' ', '\t') or is_tree_char(ch)
 
 def remove_comments(line: str) -> str:
-    """Removes comments #, <--, <-, // (everything after the first such marker)."""
+    """Remove everything after #, <--, <-, // (but keep the path)."""
     m = re.search(r'(#|<--|<-|//)', line)
     if m:
         return line[:m.start()].rstrip()
     return line
 
 def is_ignored_name(name: str) -> bool:
-    """Ignores lines that are not names."""
+    """Skip lines that are not actual files/folders."""
     name = name.strip()
     if not name:
         return True
     if all(ch == '.' for ch in name):
         return True
-    if '(' in name or ')' in name:
+    if '(' in name or ')' in name:   # e.g. "(інші скрипти)"
         return True
     if name.endswith('...'):
         return True
@@ -41,7 +42,7 @@ def is_hidden_dir(name: str) -> bool:
     return name.startswith('.') and '.' not in name[1:]
 
 def split_names(raw_name: str):
-    """Splits into multiple names via ' / ' or '/'."""
+    """Handle names with ' / ' or '/' (e.g., setup.sh/setup.ps1)."""
     if ' / ' in raw_name:
         parts = raw_name.split(' / ')
         return [p.strip() for p in parts if p.strip()]
@@ -64,25 +65,24 @@ def parse_tree(file_path: str, tab_size: int = 4):
 
     for raw_line in raw_lines:
         line = raw_line.rstrip('\n\r')
-        line = line.expandtabs(tab_size)       # tabs → spaces
-        line = remove_comments(line)           # delete comments
+        line = line.expandtabs(tab_size)      # tabs → spaces
+        line = remove_comments(line)          # remove comments
         if not line.strip():
             continue
 
-        # Define the prefix: all characters from the beginning of the line that are spaces or pseudo-graphics
+        # Prefix = all leading chars that are spaces, tabs, or tree-drawing
         prefix_end = 0
         while prefix_end < len(line) and is_whitespace_or_tree(line[prefix_end]):
             prefix_end += 1
         prefix = line[:prefix_end]
         name = line[prefix_end:].strip()
 
-        # Skip invalid names
         if is_ignored_name(name):
             continue
 
-        depth = len(prefix)   # depth = prefix length
+        depth = len(prefix)   # depth = length of prefix
 
-        # Root element (first line without prefix)
+        # Root – first line with depth 0
         if root_name is None:
             if depth == 0:
                 root_name = name.rstrip('/')
@@ -91,7 +91,7 @@ def parse_tree(file_path: str, tab_size: int = 4):
             else:
                 raise ValueError("Root element not found (expected depth 0 first).")
 
-        # Type: folder or file
+        # Determine if it's a folder or file
         if name.endswith('/'):
             is_dir = True
             clean_name = name.rstrip('/')
@@ -101,17 +101,26 @@ def parse_tree(file_path: str, tab_size: int = 4):
             first_name = names[0]
             is_dir = is_hidden_dir(first_name) or ('.' not in first_name)
 
-        # Find parent by stack (closest folder with less depth)
-        while folder_stack and folder_stack[-1][0] >= depth:
-            folder_stack.pop()
-        if not folder_stack:
-            raise ValueError(f"Invalid indentation at line: {raw_line.strip()}")
-        parent = folder_stack[-1][1]
+        # Find the parent folder
+        if depth == 0:
+            # Items at depth 0 (no indent) belong to the parent of the root
+            # Remove all previous depth-0 items except the root itself
+            while len(folder_stack) > 1 and folder_stack[-1][0] == 0:
+                folder_stack.pop()
+            parent = ""   # empty string means "same level as root"
+        else:
+            # Normal indentation: find the closest folder with depth < current
+            while len(folder_stack) > 1 and folder_stack[-1][0] >= depth:
+                folder_stack.pop()
+            if not folder_stack:
+                raise ValueError(f"Invalid indentation at line: {raw_line.strip()}")
+            parent = folder_stack[-1][1]
 
         actions.append((parent, is_dir, names))
 
+        # If it's a folder, push it onto the stack for future nesting
         if is_dir:
-            full_path = os.path.join(parent, names[0])
+            full_path = os.path.join(parent, names[0]) if parent else names[0]
             folder_stack.append((depth, full_path))
 
     if root_name is None:
@@ -126,7 +135,11 @@ def create_structure(root_dir: str, actions: list, base_path: str = '.'):
 
     for parent, is_dir, names in actions:
         for name in names:
-            full_path = os.path.join(parent, name)
+            if parent:
+                full_path = os.path.join(base_path, parent, name)
+            else:
+                full_path = os.path.join(base_path, name)
+
             if is_dir:
                 os.makedirs(full_path, exist_ok=True)
                 print(f"[DIR]  {full_path}")
