@@ -31,7 +31,95 @@ python create_structure_ua.py (or py create_structure_ua.py)
 ```
 python3 create_structure_ua.py
 ```
+Here are all 4 examples of text structures that should work correctly
 
+1)
+дир-project/
+├── .agent/
+│   ├── state.md <- Лог знайдених в інтернеті та встановлених 
+│   ├── skills_manifest.md
+│   └── logs/
+│       └── execution.log # файл логування
+			інші логи ...
+├── docs/
+    	PROJECT_PLAN.md           <-- Динамічний беклог та статус виконання задач
+│   	ARCHITECTURE.md
+│   └── CONTEXT.md	# Стислий зміст виконаного (для економії контексту)
+├── scripts
+    ├── setup.sh/setup.ps1 //- файли встановлення
+    ├── run.sh/run.ps1
+│   	test.sh / test.ps1		//- файли тестування
+│   	validate.sh/validate.ps1
+		...
+		(інші скрипти)
+├── src/
+    tests/
+	AGENT_INSTRUCTIONS.md
+├── package.json / requirements.txt
+└── README.md
+├── Скрипти запуску (генеруються агентом в кінці)
+
+2)
+app/
+    __init__.py
+    main.py
+    settings.py
+    logging.py
+adapters/
+scanner/
+parser/
+
+3)
+openwebui-universal-skills-importer/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   │
+│   ├── core/
+│   │   ├── settings.py
+│   │   ├── logging.py
+│   │
+│   ├── adapters/
+│   ├── scanner/
+│   ├── parser/
+│   └── ui/
+│
+├── tests/
+├── pyproject.toml
+├── README.md
+└── LICENSE
+
+4)
+app/
+
+    core/
+        settings.py
+        logging.py
+        registry.py
+
+    models/
+        skill.py
+        tool.py
+        prompt.py
+
+    scanner/
+        repository_scanner.py
+        file_scanner.py
+
+    parser/
+        yaml_parser.py
+        markdown_parser.py
+
+    adapters/
+        base.py
+
+        claude/
+
+    normalizer/
+
+    builder/
+
+    importer/
 ---
 
 ## UA
@@ -68,3 +156,93 @@ python create_structure_ua.py (або py create_structure_ua.py)
 ```
 python3 create_structure_ua.py
 ```
+
+Ось всі 4 приклади текстових структур які мають працювати коректно
+
+1)
+дир-project/
+├── .agent/
+│   ├── state.md <- Лог знайдених в інтернеті та встановлених 
+│   ├── skills_manifest.md
+│   └── logs/
+│       └── execution.log # файл логування
+			інші логи ...
+├── docs/
+    	PROJECT_PLAN.md           <-- Динамічний беклог та статус виконання задач
+│   	ARCHITECTURE.md
+│   └── CONTEXT.md	# Стислий зміст виконаного (для економії контексту)
+├── scripts
+    ├── setup.sh/setup.ps1 //- файли встановлення
+    ├── run.sh/run.ps1
+│   	test.sh / test.ps1		//- файли тестування
+│   	validate.sh/validate.ps1
+		...
+		(інші скрипти)
+├── src/
+    tests/
+	AGENT_INSTRUCTIONS.md
+├── package.json / requirements.txt
+└── README.md
+├── Скрипти запуску (генеруються агентом в кінці)
+
+2)
+app/
+    __init__.py
+    main.py
+    settings.py
+    logging.py
+adapters/
+scanner/
+parser/
+
+3)
+openwebui-universal-skills-importer/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   │
+│   ├── core/
+│   │   ├── settings.py
+│   │   ├── logging.py
+│   │
+│   ├── adapters/
+│   ├── scanner/
+│   ├── parser/
+│   └── ui/
+│
+├── tests/
+├── pyproject.toml
+├── README.md
+└── LICENSE
+
+4)
+app/
+
+    core/
+        settings.py
+        logging.py
+        registry.py
+
+    models/
+        skill.py
+        tool.py
+        prompt.py
+
+    scanner/
+        repository_scanner.py
+        file_scanner.py
+
+    parser/
+        yaml_parser.py
+        markdown_parser.py
+
+    adapters/
+        base.py
+
+        claude/
+
+    normalizer/
+
+    builder/
+
+    importer/
