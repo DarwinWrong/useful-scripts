@@ -33,6 +33,7 @@ python3 create_structure_ua.py
 ```
 Here are all 4 examples of text structures that should work correctly
 
+<pre>
 1)
 дир-project/
 ├── .agent/
@@ -108,6 +109,7 @@ app/
     normalizer/
 
     builder/
+</pre>
 ---
 
 ## UA
