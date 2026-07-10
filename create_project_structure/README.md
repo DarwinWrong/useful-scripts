@@ -33,8 +33,8 @@ python3 create_structure_ua.py
 ```
 Here are all 4 examples of text structures that should work correctly
 
-<pre>
 1)
+```
 дир-project/
 ├── .agent/
 │   ├── state.md <- Лог знайдених в інтернеті та встановлених 
@@ -59,8 +59,10 @@ Here are all 4 examples of text structures that should work correctly
 ├── package.json / requirements.txt
 └── README.md
 ├── Скрипти запуску (генеруються агентом в кінці)
-
+```
+			
 2)
+```
 app/
     __init__.py
     main.py
@@ -70,8 +72,10 @@ adapters/
 scanner/
 parser/
 normalizer/
-
+```
+			
 3)
+```
 openwebui-universal-skills-importer/
 ├── app/
 │   ├── __init__.py
@@ -89,8 +93,10 @@ openwebui-universal-skills-importer/
 ├── pyproject.toml
 ├── README.md
 └── LICENSE
-
+```
+			
 4)
+```
 app/
 
     core/
@@ -109,7 +115,7 @@ app/
     normalizer/
 
     builder/
-</pre>
+```
 ---
 
 ## UA
