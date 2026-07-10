@@ -40,21 +40,21 @@ Here are all 4 examples of text structures that should work correctly
 │   ├── skills_manifest.md
 │   └── logs/
 │       └── execution.log # файл логування
-			інші логи ...
+            інші логи ...
 ├── docs/
-    	PROJECT_PLAN.md           <-- Динамічний беклог та статус виконання задач
-│   	ARCHITECTURE.md
-│   └── CONTEXT.md	# Стислий зміст виконаного (для економії контексту)
+        PROJECT_PLAN.md           <-- Динамічний беклог та статус виконання задач
+│       ARCHITECTURE.md
+│   └── CONTEXT.md  # Стислий зміст виконаного (для економії контексту)
 ├── scripts
     ├── setup.sh/setup.ps1 //- файли встановлення
     ├── run.sh/run.ps1
-│   	test.sh / test.ps1		//- файли тестування
-│   	validate.sh/validate.ps1
-		...
-		(інші скрипти)
+│       test.sh / test.ps1      //- файли тестування
+│       validate.sh/validate.ps1
+        ...
+        (інші скрипти)
 ├── src/
     tests/
-	AGENT_INSTRUCTIONS.md
+    AGENT_INSTRUCTIONS.md
 ├── package.json / requirements.txt
 └── README.md
 ├── Скрипти запуску (генеруються агентом в кінці)
@@ -68,6 +68,7 @@ app/
 adapters/
 scanner/
 parser/
+normalizer/
 
 3)
 openwebui-universal-skills-importer/
@@ -81,10 +82,9 @@ openwebui-universal-skills-importer/
 │   │
 │   ├── adapters/
 │   ├── scanner/
-│   ├── parser/
-│   └── ui/
 │
 ├── tests/
+├── assets/
 ├── pyproject.toml
 ├── README.md
 └── LICENSE
@@ -95,20 +95,10 @@ app/
     core/
         settings.py
         logging.py
-        registry.py
 
     models/
         skill.py
         tool.py
-        prompt.py
-
-    scanner/
-        repository_scanner.py
-        file_scanner.py
-
-    parser/
-        yaml_parser.py
-        markdown_parser.py
 
     adapters/
         base.py
@@ -118,8 +108,6 @@ app/
     normalizer/
 
     builder/
-
-    importer/
 ---
 
 ## UA
